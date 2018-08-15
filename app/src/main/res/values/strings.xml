@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Emotional Assistant</string>
+    <string name="connect">Connect HR device</string>
+    <string name="disconnect">Disconnect HR device</string>
+    <string name="status">State</string>
+    <string name="current_pulse">Current pulse</string>
+    <string name="action_settings">User Settings</string>
+    <string name="action_preferences">Alert Preferences</string>
+    <string name="action_history">Alert History</string>
+    <string name="action_help">Help</string>
+    <string name="action_exit">Exit</string>
+    <string-array name="preferences_array">
+        <item>None</item>
+        <item>Activity</item>
+        <item>Music</item>
+        <item>Call</item>
+        <item>Book</item>
+        <item>Picture</item>
+    </string-array>
+    <string-array name="probabilities_array">
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>97</item>
+        <item>99</item>
+    </string-array>
+    <string-array name="heartrate_min_array">
+        <item>0</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>120</item>
+        <item>140</item>
+        <item>160</item>
+        <item>180</item>
+    </string-array>
+    <string-array name="heartrate_max_array">
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>120</item>
+        <item>140</item>
+        <item>160</item>
+        <item>180</item>
+        <item>250</item>
+    </string-array>
+
+    <string name="title_activity_preferences">Preferences Setup</string>
+    <string name="title_activity_setup">User Setup</string>
+    <string name="title_activity_history">Alert History</string>
+    <string name="title_activity_help">Emotional Assistant Help</string>
+    <string name="title_actions">Emotional Actions</string>
+    <string name="title_alerts">Alert Settings</string>
+    <string name="title_borderlines">Borderline values (Thresholds)</string>
+    <string name="title_probabilities">Voice Probability (%)</string>
+    <string name="title_heartrates">Heartrate Ranges \n (bpm)</string>
+    <string name="title_currentpulse">Current HR</string>
+    <string name="happy">Happy</string>
+    <string name="sad">Sad</string>
+    <string name="neutral">Neutral</string>
+    <string name="fear">Fear</string>
+    <string name="angry">Angry</string>
+
+    <integer name="hr_offset_happy">6</integer>
+    <integer name="hr_offset_sad">7</integer>
+    <integer name="hr_offset_angry">11</integer>
+    <integer name="hr_offset_fear">10</integer>
+    <integer name="hr_default_min_neutral">60</integer>
+    <integer name="hr_default_max_neutral">70</integer>
+    <integer name="hr_absolute_max">220</integer>
+
+</resources>

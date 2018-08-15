@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.50"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Preferences Setup"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@color/vkgreen"
+                android:gravity="center"
+                android:text="Happy"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+
+            <emoassist.views.EmotionBarView
+                android:id="@+id/block11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_toRightOf="@id/textView11"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+            </emoassist.views.EmotionBarView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/vkyellow"
+                android:gravity="center"
+                android:text="Neutral"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+
+            <emoassist.views.EmotionBarView
+                android:id="@+id/block12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@id/textView12"
+                android:background="@color/transparent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+            </emoassist.views.EmotionBarView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/vkred"
+                android:gravity="center"
+                android:text="Angry"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <emoassist.views.EmotionBarView
+                android:id="@+id/block13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@id/textView13"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner13"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+            </emoassist.views.EmotionBarView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/vkblue"
+                android:gravity="center"
+                android:text="Sad"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+
+            <emoassist.views.EmotionBarView
+                android:id="@+id/block14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@id/textView14"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+            </emoassist.views.EmotionBarView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/vkpurple"
+                android:gravity="center"
+                android:text="Fear"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <emoassist.views.EmotionBarView
+                android:id="@+id/block15"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@id/textView15"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner15"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+            </emoassist.views.EmotionBarView>
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
