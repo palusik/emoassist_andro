@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "vokaturi.sampleapp"
+        applicationId "com.emoassist"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
@@ -21,13 +21,10 @@ android {
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.android.support:design:26.1.0'
-    compile(name: 'OpenVokaturi-Android', ext: 'aar')
+    implementation files('libs/OpenVokaturi-Android.aar')
     implementation 'com.mcxiaoke.volley:library:1.0.19'
-    //implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:support-v4:26.1.0'
-    //implementation files('libs/antpluginlib_3-6-0.jar')
-    //implementation files('libs/fit_16.00.jar')
     implementation files('libs/antpluspluginlib.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
