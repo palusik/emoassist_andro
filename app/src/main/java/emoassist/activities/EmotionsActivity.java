@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +28,9 @@ import android.widget.Button;
 import android.view.Menu;
 import android.view.View;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import emoassist.R;
@@ -543,9 +551,74 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
 
            notificationService.raiseAlert(remoteMonitor, UserId, emotionType, emotionProbabilityValue, currentPulseValue, actionPreferences.get(posEmotions), alertPreferences);
 
+           // if local actions, perform the actions locally
+           if (remoteMonitor == false) {
+               if (actionPreferences.get(posEmotions).equals("Music")) {
+                   audioPlayer(alertPreferences.get(1));
+               } else if (actionPreferences.get(posEmotions).equals("Picture")) {
+                   showImage(alertPreferences.get(4));
+               }
+           }
 
            Toast.makeText(this, "Informative Notification: Emotion Type " + emotionType + " is raised. \nProbability: " + String.valueOf(emotionProbabilityValue) + ", Heart Rate: " + currentPulseValue + "\nFollowing action is required: " + actionPreferences.get(posEmotions), Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    // this will play in background music selected in preferences
+    public void audioPlayer(String fileName){
+
+        //set up MediaPlayer
+        MediaPlayer mp = new MediaPlayer();
+
+        Uri myUri1 = Uri.parse(fileName);
+
+        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        try {
+            mp.setDataSource(getApplicationContext(), myUri1);
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(getApplicationContext(), "Music file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        } catch (SecurityException e) {
+            Toast.makeText(getApplicationContext(), "Music file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "Music file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            mp.prepare();
+        } catch (IllegalStateException e) {
+            Toast.makeText(getApplicationContext(), "Music file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Music file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        }
+        mp.start();
+    }
+
+    // this will present the selected image from preferences
+    public void showImage(String fileName){
+
+        Toast toast = new Toast(getApplicationContext());
+
+        Uri myUri1 = Uri.parse(fileName);
+        ImageView view = new ImageView(getApplicationContext());
+
+        try {
+            InputStream is = getContentResolver().openInputStream(myUri1);
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            view.setImageBitmap(bitmap);
+            is.close();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "Picture file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Picture file is not configured correctly! Please, update user preferences.", Toast.LENGTH_SHORT).show();
+        }
+
+
+        toast.setView(view);
+        toast.show();
 
     }
 }

@@ -72,10 +72,10 @@
     <string name="fear">Fear</string>
     <string name="angry">Angry</string>
 
-    <integer name="hr_offset_happy">7</integer>
-    <integer name="hr_offset_sad">8</integer>
-    <integer name="hr_offset_angry">13</integer>
-    <integer name="hr_offset_fear">12</integer>
+    <integer name="hr_offset_happy">6</integer>
+    <integer name="hr_offset_sad">7</integer>
+    <integer name="hr_offset_angry">11</integer>
+    <integer name="hr_offset_fear">10</integer>
     <integer name="hr_default_min_neutral">60</integer>
     <integer name="hr_default_max_neutral">70</integer>
     <integer name="hr_absolute_max">220</integer>

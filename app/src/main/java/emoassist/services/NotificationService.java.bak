@@ -1,7 +1,6 @@
 package emoassist.services;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -15,8 +14,6 @@ import java.util.Date;
 
 public class NotificationService {
 
-    public static final int DEFAULT_CONNECTION_TIMEOUT = 2500;
-    public static final int DEFAULT_SOCKET_TIMEOUT = 5000;
 
     Date lastCapturedH;
     Date lastCapturedA;
@@ -84,6 +81,8 @@ public class NotificationService {
         if (emotionProbabilityValue == null)
             emotionProbabilityValue = Float.valueOf(0);
 
+//        System.out.println("params: " + currentPulseValue);
+
         String[] myPostParams = { UserId, emotionType, String.valueOf(emotionProbabilityValue), String.valueOf(currentPulseValue), actionType, targetValue };
 
         Date date = new Date();
@@ -99,7 +98,7 @@ public class NotificationService {
         //  business logic notification is disabled
         if (remoteMonitor != true)
         {
-
+            System.out.println("++++ Business logic ingored");
             return;
         }
 
@@ -189,17 +188,17 @@ public class NotificationService {
                 //httpConnection.setFollowRedirects(true);
                 httpConnection.setRequestMethod("POST");
                 httpConnection.setRequestProperty("Content-Type", "application/json");
-                httpConnection.setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT);
-                httpConnection.setReadTimeout(DEFAULT_SOCKET_TIMEOUT);
                 //httpConnection.setRequestProperty("Accept", "application/json");
                 // Not required
                 // urlConnection.setRequestProperty("Content-Length", String.valueOf(input.getBytes().length));
 
+                System.out.println(data.toString());
 
                 // Writes the JSON parsed as string to the connection
                 DataOutputStream wr = new DataOutputStream(httpConnection.getOutputStream());
                 wr.write(data.toString().getBytes());
                 Integer responseCode = httpConnection.getResponseCode();
+                System.out.println(responseCode);
 
                 BufferedReader bufferedReader;
 
@@ -273,9 +272,6 @@ public class NotificationService {
                 //httpConnection.setFollowRedirects(true);
                 httpConnection.setRequestMethod("POST");
                 httpConnection.setRequestProperty("Content-Type", "application/json");
-                httpConnection.setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT);
-                httpConnection.setReadTimeout(DEFAULT_SOCKET_TIMEOUT);
-
                 //httpConnection.setRequestProperty("Accept", "application/json");
                 // Not required
                 // urlConnection.setRequestProperty("Content-Length", String.valueOf(input.getBytes().length));

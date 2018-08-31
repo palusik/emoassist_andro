@@ -290,18 +290,6 @@
                     android:inputType="text"
                     android:hint="Four Seasons - Vivaldi"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                <Button
-                    android:id="@+id/buttonAudioSearch"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:onClick="audioLookup"
-                    android:text="..." />
-
             </emoassist.views.EmotionBarView>
         </RelativeLayout>
 
@@ -338,17 +326,6 @@
                     android:gravity="center"
                     android:hint="Call to my wife"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                <Button
-                    android:id="@+id/buttonUserSearch"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:onClick="contactLookup"
-                    android:text="..." />
             </emoassist.views.EmotionBarView>
         </RelativeLayout>
 
@@ -421,17 +398,6 @@
                     android:gravity="center"
                     android:hint="Family picture"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                <Button
-                    android:id="@+id/buttonVideoSearch"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:onClick="videoLookup"
-                    android:text="..." />
 
             </emoassist.views.EmotionBarView>
         </RelativeLayout>
