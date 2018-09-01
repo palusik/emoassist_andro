@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import org.json.JSONException;
 public class HistoryActivity extends AppCompatActivity {
 
+
     EditText editTextUser;     // UserId
     EditText editTextDate;
     RequestQueue requestQueue;  // This is our requests queue to process our HTTP requests.
@@ -40,7 +41,7 @@ public class HistoryActivity extends AppCompatActivity {
     ProgressDialog mProgressBar;
 
 
-    String baseUrl = "https://processing/api/useralert/";  // This is the API base URL (GitHub API)
+    String baseUrl = "https://<change this to your domain of processing application>/processing/api/useralert/";  // This is the API base URL (GitHub API)
     String url;  // This will hold the full URL which will include the username entered in the etGitHubUser.
 
     @Override

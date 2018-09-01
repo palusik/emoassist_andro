@@ -1,7 +1,6 @@
 package emoassist.services;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -27,8 +26,8 @@ public class NotificationService {
     // delays for invoking business logic beteeen same emotional state
     Integer BUSINESS_LOGIC_DELAYS = 60;
 
-    public final String BaseURLAlert = "https://processing/api/alertWithCheck";
-    public final String BaseURLBusinessLogic = "https://notificationLugicApps";
+    public final String BaseURLAlert = "https://<change this to the domain of your processing application>/api/alertWithCheck";
+    public final String BaseURLBusinessLogic = "https://<change this to URL of your Logic Apps for notificaiton>";
 
     /**
      * The instance of this utils object
@@ -73,6 +72,10 @@ public class NotificationService {
             case "Picture":
                 posAlert = 4;
                 targetValue = alerts.get(4).toString();
+                break;
+            case "None":
+                posAlert = 5;
+                targetValue = "None";
                 break;
             default:
                 targetValue = "Vibrate";

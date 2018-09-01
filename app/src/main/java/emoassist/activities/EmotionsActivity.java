@@ -13,11 +13,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 import emoassist.R;
 import emoassist.interfaces.UpdatableActivity;
@@ -117,6 +119,18 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
     private Boolean remoteMonitor;
     private Integer currentPulseValue;
     private Integer measurementCountValue;
+
+    private Date lastAlertedH;
+    private Date lastAlertedA;
+    private Date lastAlertedS;
+    private Date lastAlertedF;
+    private Date lastAlertedN;
+
+    // delays for invoking alerts locally
+    private static final Integer SAME_ALERT_DELAYS = 5;
+
+    // default duration of vibration
+    private static final Integer VIBRATION_DURATION = 200;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -507,14 +521,11 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
             swMode.setClickable(false);
         }
 
-        Log.i("CHECKED NEWREMOTE:", String.valueOf(newRemoteMonitor));
-
         if(newRemoteMonitor == null) remoteMonitor = false;
         else {
             remoteMonitor = newRemoteMonitor;
         }
 
-        Log.i("CHECKED REMOTE:", String.valueOf(remoteMonitor));
         swMode.setChecked(remoteMonitor);
 
     }
@@ -527,6 +538,8 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
         Float emotionProbabilityValue = CommonCalculations.getMax((float) emotionProbabilities.happiness, (float) emotionProbabilities.neutrality, (float) emotionProbabilities.anger, (float) emotionProbabilities.sadness, (float) emotionProbabilities.fear);
 
         String emotionType = CommonCalculations.getEmotionType(posEmotions);
+
+        String todoValue = "";
 
         Boolean reportState = false;
 
@@ -551,16 +564,71 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
 
            notificationService.raiseAlert(remoteMonitor, UserId, emotionType, emotionProbabilityValue, currentPulseValue, actionPreferences.get(posEmotions), alertPreferences);
 
-           // if local actions, perform the actions locally
+            Boolean invokeAlertFlow = false;
+
+            Date date = new Date();
+
+            switch (emotionType) {
+                case "H":
+                    if (lastAlertedH == null || (date.getTime() - lastAlertedH.getTime()) > SAME_ALERT_DELAYS * 1000) {
+                        lastAlertedH = date;
+                        invokeAlertFlow = true;
+                    }
+                    break;
+                case "N":
+                    if (lastAlertedN == null || (date.getTime() - lastAlertedN.getTime()) > SAME_ALERT_DELAYS * 1000) {
+                        lastAlertedN = date;
+                        invokeAlertFlow = true;
+                    }
+                    break;
+                case "A":
+                    if (lastAlertedA == null || (date.getTime() - lastAlertedA.getTime()) > SAME_ALERT_DELAYS * 1000) {
+                        lastAlertedA = date;
+                        invokeAlertFlow = true;
+                    }
+                    break;
+                case "S":
+                    if (lastAlertedS == null || (date.getTime() - lastAlertedS.getTime()) > SAME_ALERT_DELAYS * 1000) {
+                        lastAlertedS = date;
+                        invokeAlertFlow = true;
+                    }
+                    break;
+                case "F":
+                    if (lastAlertedF == null || (date.getTime() - lastAlertedF.getTime()) > SAME_ALERT_DELAYS * 1000) {
+                        lastAlertedF = date;
+                        invokeAlertFlow = true;
+                    }
+                    break;
+            }
+
+            if (invokeAlertFlow == false) return;
+            // if local actions, perform the actions locally
            if (remoteMonitor == false) {
                if (actionPreferences.get(posEmotions).equals("Music")) {
                    audioPlayer(alertPreferences.get(1));
                } else if (actionPreferences.get(posEmotions).equals("Picture")) {
                    showImage(alertPreferences.get(4));
                }
+               else if (actionPreferences.get(posEmotions).equals("Vibrate")) {
+                 vibrate();
+               }
+               else if (actionPreferences.get(posEmotions).equals("Activity")) {
+                   todoValue = alertPreferences.get(0).toString();
+               }
+               else if (actionPreferences.get(posEmotions).equals("Book")) {
+                   todoValue = alertPreferences.get(3).toString();
+               }
+               else if (actionPreferences.get(posEmotions).equals("Call")) {
+                   todoValue = alertPreferences.get(2).toString();
+               }
+
            }
 
-           Toast.makeText(this, "Informative Notification: Emotion Type " + emotionType + " is raised. \nProbability: " + String.valueOf(emotionProbabilityValue) + ", Heart Rate: " + currentPulseValue + "\nFollowing action is required: " + actionPreferences.get(posEmotions), Toast.LENGTH_SHORT).show();
+           if (todoValue != "")
+               Toast.makeText(this, "Informative Notification: Emotion Type " + emotionType + " is raised. \nProbability: " + String.valueOf(emotionProbabilityValue) + ", Heart Rate: " + currentPulseValue + "\nFollowing action is required: " + actionPreferences.get(posEmotions) + "\n do: " + todoValue, Toast.LENGTH_SHORT).show();
+            else
+               Toast.makeText(this, "Informative Notification: Emotion Type " + emotionType + " is raised. \nProbability: " + String.valueOf(emotionProbabilityValue) + ", Heart Rate: " + currentPulseValue + "\nFollowing action is required: " + actionPreferences.get(posEmotions), Toast.LENGTH_SHORT).show();
+
         }
 
     }
@@ -570,6 +638,8 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
 
         //set up MediaPlayer
         MediaPlayer mp = new MediaPlayer();
+
+        if(mp.isPlaying()) return;
 
         Uri myUri1 = Uri.parse(fileName);
 
@@ -620,5 +690,19 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
         toast.setView(view);
         toast.show();
 
+    }
+
+
+
+    // this will present the selected image from preferences
+    public void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(VIBRATION_DURATION, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            v.vibrate(VIBRATION_DURATION);
+        }
     }
 }
