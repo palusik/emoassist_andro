@@ -402,7 +402,7 @@ public class EmotionsActivity extends AppCompatActivity implements UpdatableActi
     }
 
     public void setPulse ( Integer seqence, Byte pulse, Integer count) {
-        currentPulseValue = Integer.valueOf(pulse);
+        currentPulseValue = Math.abs(Integer.valueOf(pulse));
         measurementCountValue = count;
         currentHRPulse.setText(String.valueOf(pulse) + "|" + String.valueOf(count));
 
